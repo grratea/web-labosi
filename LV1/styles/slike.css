@@ -1,0 +1,138 @@
+/* ============================================================
+   STYLE_SLIKE.CSS 
+   ============================================================ */
+
+/* 1. Osiguraj da varijable postoje ako nisu u glavnom CSS-u */
+:root {
+    --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    --color-accent: #e50914;
+    --color-border: rgba(255, 255, 255, 0.2);
+    --font-heading: 'Arial', sans-serif;
+}
+
+.galerija {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /*AUTOMATSKI PODIJELI*/
+    gap: 25px; /* Malo veći razmak za bolji efekt povećanja */
+    padding: 40px 0;
+    /* Makni overflow: hidden odavde ako ga imaš, jer će odrezati zumirane slike */
+}
+
+/* Kartica slike */
+.gallery-item {
+    position: relative;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+    /* Jako bitno: overflow: hidden mora biti OVDJE da zoom ne izlazi iz okvira kartice */
+    overflow: hidden; 
+    border: 1px solid var(--color-border);
+    background: #000;
+}
+
+/* Slika unutar kartice */
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 3/2; /* Održava sve slike istim bez obzira na izvor */
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* NETFLIX ZOOM EFEKT NA HOVER */
+.gallery-item:hover {
+    transform: scale(1.05); /* Smanjeno s 1.08 na 1.05 radi stabilnosti */
+    z-index: 5; 
+    box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+    border-color: var(--color-accent);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Preklopni sloj (overlay) na hover */
+.gallery-item::after {
+    content: "Pogledaj";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(229, 9, 20, 0.7) 0%, transparent 60%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: white;
+    text-transform: uppercase;
+    pointer-events: none; /* Da ne smeta kliku na link ispod */
+}
+
+.gallery-item:hover::after { opacity: 1; }
+
+/* ============================================================
+   CSS-ONLY LIGHTBOX (Popravljena logika prikazivanja)
+   ============================================================ */
+.lightbox {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.92);
+    display: none; /* Skriveno dok se ne aktivira :target */
+    z-index: 9999; /* Mora biti najveći na stranici */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+
+/* Prikazivanje kad je ID u URL-u */
+.lightbox:target { 
+    display: flex; 
+}
+
+/* DODANO: Overlay za zatvaranje klikom sa strane */
+.lightbox-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    cursor: zoom-out;
+}
+
+.lightbox-content {
+    max-width: 85%;
+    max-height: 85vh;
+    position: relative;
+    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10000; /* Iznad overlay-a */
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 85vh;
+    display: block;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+/* Gumb za zatvaranje */
+.close-btn {
+    position: absolute;
+    top: -40px; right: 0;
+    color: #fff;
+    opacity: 0.7;
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: var(--transition);
+}
+
+.close-btn:hover { 
+    opacity: 1;
+    color: var(--color-accent);
+}
