@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerija CineClassics</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/slike.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="logo">
+                <h1>CineClassics</h1>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <ul class="nav-menu">
+            <li><a href="/index.html">Početna</a></li>
+            <li><a href="/pages/grafikon.html">Statistika</a></li>
+            <li><a href="/pages/slike.html">Galerija</a></li>
+        </ul>
+    </nav>
+
+    <main class="gallery-main">
+        
+        <div class="gallery-header">
+            <h2>Filmska Inspiracija</h2>
+            <p>Pregledajte ikonske vizuale zlatnog doba svjetske kinematografije.</p>
+        </div>
+
+        <section class="galerija">
+            <figure class="gallery-item"><a href="#img1"><img src="https://picsum.photos/seed/cine1/600/400" alt="Scena 1"></a></figure>
+            <figure class="gallery-item"><a href="#img2"><img src="https://picsum.photos/seed/cine2/600/400" alt="Scena 2"></a></figure>
+            <figure class="gallery-item"><a href="#img3"><img src="https://picsum.photos/seed/cine3/600/400" alt="Scena 3"></a></figure>
+            <figure class="gallery-item"><a href="#img4"><img src="https://picsum.photos/seed/cine4/600/400" alt="Scena 4"></a></figure>
+            <figure class="gallery-item"><a href="#img5"><img src="https://picsum.photos/seed/cine5/600/400" alt="Scena 5"></a></figure>
+            <figure class="gallery-item"><a href="#img6"><img src="https://picsum.photos/seed/cine6/600/400" alt="Scena 6"></a></figure>
+        </section>
+
+        <!-- kada kliknemo, url stranica ode na tu sliku, kada zatvorimo url se mijenja tj ide na # i lightbox se skriva -->
+
+        <div id="img1" class="lightbox">
+            <a href="#" class="lightbox-overlay" aria-label="Zatvori"></a>
+            <div class="lightbox-content">
+                <a href="#" class="close-btn">Zatvori ×</a>
+                <img src="https://picsum.photos/seed/cine1/1200/800" alt="Uvećana scena 1">
+            </div>
+        </div>
+
+        <div id="img2" class="lightbox">
+            <a href="#" class="lightbox-overlay"></a>
+            <div class="lightbox-content">
+                <a href="#" class="close-btn">Zatvori ×</a>
+                <img src="https://picsum.photos/seed/cine2/1200/800" alt="Uvećana scena 2">
+            </div>
+        </div>
+
+        <div id="img3" class="lightbox">
+            <a href="#" class="lightbox-overlay"></a>
+            <div class="lightbox-content">
+                <a href="#" class="close-btn">Zatvori ×</a>
+                <img src="https://picsum.photos/seed/cine3/1200/800" alt="Uvećana scena 3">
+            </div>
+        </div>
+
+        <div id="img4" class="lightbox">
+            <a href="#" class="lightbox-overlay"></a>
+            <div class="lightbox-content">
+                <a href="#" class="close-btn">Zatvori ×</a>
+                <img src="https://picsum.photos/seed/cine4/1200/800" alt="Uvećana scena 4">
+            </div>
+        </div>
+
+        <div id="img5" class="lightbox">
+            <a href="#" class="lightbox-overlay"></a>
+            <div class="lightbox-content">
+                <a href="#" class="close-btn">Zatvori ×</a>
+                <img src="https://picsum.photos/seed/cine5/1200/800" alt="Uvećana scena 5">
+            </div>
+        </div>
+
+        <div id="img6" class="lightbox">
+            <a href="#" class="lightbox-overlay"></a>
+            <div class="lightbox-content">
+                <a href="#" class="close-btn">Zatvori ×</a>
+                <img src="https://picsum.photos/seed/cine6/1200/800" alt="Uvećana scena 6">
+            </div>
+        </div>
+        
+        </main>
+
+    <footer class="site-footer">
+        <p>Projekt iz Web Programiranja 2025/2026. Sva prava pridržana.</p>
+    </footer>
+
+</body>
+</html>
