@@ -1,0 +1,278 @@
+/* ============================================================
+   GOOGLE FONTS
+   Uvozimo Bebas Neue za naslove (Netflix stil)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap');
+
+/* ============================================================
+   CSS VARIJABLE - Netflix Premium Vibe
+   ============================================================ */
+:root {
+    --color-bg: #141414;           /* Netflix crna */
+    --color-card: #181818;         /* Nešto svjetlija crna za kartice */
+    --color-accent: #E50914;       /* Netflix crvena */
+    --color-accent-hover: #b20710; /* Tamnija crvena za hover */
+    --color-text: #FFFFFF;         /* Čista bijela */
+    --color-text-muted: #B3B3B3;   /* Siva za opise */
+    --color-border: #2a2a2a;       /* Vrlo tamni obrubi */
+    
+    /* Tipografija */
+    --font-heading: 'Bebas Neue', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    
+    /* Ostalo */
+    --max-width: 1200px;
+    --transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    --shadow-card: 0 10px 30px rgba(0,0,0,0.7);
+}
+
+/* ============================================================
+   OSNOVNI RESET I ANIMACIJE
+   ============================================================ */
+
+/*  svaki put kada refresham stranicu, elementi na toj stranici ce se kao podizati prema gore?? */
+/*  bez toga stranica je staticna
+    primjenjume na grid
+*/
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden; 
+    /* jako dobro za mobitele*/
+    /* Sprječava vodoravno skrolanje tj. nema one vodoravne trake dolje, ako slucajno prede velicinu*/
+}
+
+/* Naslovi - Bebas Neue */
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+    font-weight: 400; /* Bebas Neue nema težine */
+    margin-bottom: 15px;
+}
+
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.8rem; color: var(--color-text-muted); }
+
+/* ============================================================
+   HEADER & NAVIGACIJA
+   ============================================================ */
+.site-header {
+    /* Slojeviti gradijent za premium osjećaj */
+    background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 100%);
+    padding: 1.5rem 4%;
+    position: sticky; /*ostaje kada skrollamo*/
+    top: 0;
+    z-index: 1000;
+}
+
+/*centriranje sadrzaja UNUTAR zaglavlja*/
+.header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    color: var(--color-accent);
+    font-size: 2.5rem;
+    margin: 0;
+    line-height: 1;
+}
+
+/* Navigacija - Flexbox */
+.main-nav {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 10px 4%;
+}
+
+.nav-menu {
+    display: flex; /* SLAZE IH JEDAN DO DRUGOG*/
+    list-style: none;
+    gap: 30px;
+    justify-content: center;
+}
+
+.nav-menu a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: var(--transition);
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* Hover linija ispod linka */
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background-color: var(--color-accent);
+    transition: var(--transition);
+}
+
+.nav-menu a:hover::after { width: 100%; } /*VRACA LINIJU NA NULU*/
+.nav-menu a:hover { color: var(--color-accent); }
+
+/* ============================================================
+   RESPONZIVNI GRID SUSTAV
+   Desktop: 2 stupca (2/3 + 1/3), Mobile: 1 stupac
+   ============================================================ */
+.content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /*TEHNICKI TRI STUPCA, ALI PRVI JE KAO NJIH DVOJE, PA JE DVA*/
+    gap: 40px;
+    padding: 40px 4%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    animation: fadeInUp 0.8s ease-out; /* animacija pojavljivanja cijelog grida */
+}
+
+/* Prilagodba za tablete/mobitele */
+/*RESPONZIVNOST - primijeni ako je ekran uzi od 900 piksela*/
+@media (max-width: 900px) {
+    .content-grid { grid-template-columns: 1fr; }
+    .site-header .header-inner { flex-direction: column; gap: 15px; }
+}
+
+/* ============================================================
+   KARTICE (Sekcije)
+   ============================================================ */
+section, aside, article {
+    background: var(--color-card);
+    padding: 30px;
+    border-radius: 4px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-border); /* Suptilan obrub */
+}
+
+/* ============================================================
+   TABLICA KLASIKA
+   ============================================================ */
+.table-container { overflow-x: auto; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: rgba(0,0,0,0.2);
+}
+
+
+
+th {
+    text-align: left;
+    padding: 15px;
+    color: var(--color-accent);
+    border-bottom: 2px solid var(--color-border);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+/*REDAK*/
+td {
+    padding: 15px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.95rem;
+    color: var(--color-text);
+    transition: var(--transition);
+}
+
+/* Hover efekt na redovima */
+tr:hover td {
+    background: rgba(255,255,255,0.05);
+}
+
+/* Crvena linija s lijeve strane na hover */
+tr td:first-child {
+    border-left: 3px solid transparent;
+}
+
+tr:hover td:first-child {
+    border-left-color: var(--color-accent);
+}
+
+/* Stilizirane značajke žanrova (badges) */
+.genre-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--color-text-muted);
+}
+
+.genre-tag.drama { border-color: var(--color-accent); color: rgb(255, 0, 0); }
+.genre-tag.crime { border-color: #ffd700; color: #ffd700; } 
+.genre-tag.animation { border-color: #0dff00; color: #44ff00; } 
+.genre-tag.romance { border-color: #ff00bf; color: #ff00bf; } 
+
+/* ============================================================
+   GUMBOVI (CTA)
+   ============================================================ */
+.cta-btn {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: white;
+    padding: 12px 28px;
+    text-decoration: none;
+    border-radius: 2px;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(229, 9, 20, 0.3);
+}
+
+.cta-btn:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 15px rgba(229, 9, 20, 0.5);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+    text-align: center;
+    padding: 60px 4%;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.site-footer p { margin-bottom: 10px; }
+
+@media (max-width: 768px) {
+    /* smanjujem font i padding u tablici */
+    th {
+        padding: 10px 8px; /* manji razmak */
+        font-size: 0.85rem;  /* smanjen font naslova */
+        letter-spacing: 0.5px;
+    }
+
+    td {
+        padding: 10px 8px; /* manji razmak u ćelijama */
+        font-size: 0.8rem;   /* smanjen font sadržaja */
+    }
+}
